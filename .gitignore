@@ -14,6 +14,8 @@ firmware/**/build*/
 firmware/**/sdkconfig.old
 firmware/**/managed_components/
 firmware/**/.idf_component_manager/
+# Hardware test projects use `idf.py set-target`; its generated sdkconfig is local state.
+firmware/tests/**/sdkconfig
 
 # Editor and operating-system files
 .vscode/

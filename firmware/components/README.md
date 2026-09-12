@@ -42,3 +42,5 @@ idf_component_register(SRCS "main.c" REQUIRES tm_chassis tm_sensors)
 公共组件包含当前底盘和传感器的引脚、轮径、PID 与设备参数。使用不同板型或机械结构时，应先将这些参数抽为项目配置并完成台架验证。红外循线、相机循线、找球、推球和网页调试都是应用专用代码，不属于这些公共组件。
 
 所有需要按实车修改的变量、测量方法和验证测试见 [硬件配置与标定指南](../../docs/HARDWARE_CALIBRATION.md)。
+
+各组件的接口范围、实现位置和验证要求见：[`tm_chassis`](tm_chassis/README.md)、[`tm_sensors`](tm_sensors/README.md)、[`tm_trajectory`](tm_trajectory/README.md) 和 [`tm_n3`](tm_n3/README.md)。
