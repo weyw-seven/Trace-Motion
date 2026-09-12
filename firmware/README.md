@@ -8,6 +8,8 @@
 | `apps/line-infrared/` | 四路红外循迹、超声避障和 OLED 状态显示 | 已接入公共组件，需按实际车辆验证 |
 | `apps/line-ball-camera/` | 相机循迹、找球与推球 | 源码已整理，尚缺可复现工程配置 |
 
+`tests/` 存放独立构建的底盘标定与硬件验收程序，不是日常任务应用。参见 [测试说明](tests/README.md)。
+
 ## 组件布局
 
 公共实现位于 `components/`，由 ESP-IDF 的 `EXTRA_COMPONENT_DIRS` 发现：
