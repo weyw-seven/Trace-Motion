@@ -106,6 +106,7 @@ idf.py build
 - [固件说明](firmware/README.md)
 - [公共组件说明](firmware/components/README.md)
 - [固件测试说明](firmware/tests/README.md)
+- [硬件配置与标定指南](docs/HARDWARE_CALIBRATION.md)
 - [系统架构](docs/TRACE_MOTION_ARCHITECTURE.md)
 - [模块边界](docs/FIRMWARE_MODULE_MAP.md)
 - [实机操作说明](docs/TRACE_MOTION_ROBOT_USER_GUIDE.md)

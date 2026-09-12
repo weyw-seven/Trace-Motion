@@ -45,3 +45,5 @@ idf_component_register(SRCS "main.c" REQUIRES tm_chassis tm_sensors tm_line_ir)
 ## 配置与边界
 
 公共组件包含当前底盘的引脚、轮径、PID 和设备参数。使用不同板型或机械结构时，应先将这些参数抽为项目配置并完成台架验证。`line-ball-camera` 的视觉、找球、推球和网页调试逻辑仍是应用专用代码，不属于这些公共组件。
+
+所有需要按实车修改的变量、测量方法和验证测试见 [硬件配置与标定指南](../../docs/HARDWARE_CALIBRATION.md)。
