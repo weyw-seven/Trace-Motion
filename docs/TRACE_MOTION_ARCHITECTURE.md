@@ -1,13 +1,13 @@
-# N3 联合工程结构与运行原理
+# Trace Motion（追迹）联合工程结构与运行原理
 
-N3 系统由两个独立工程组成，二者通过 **TRJ2 轨迹文件** 与 **N3 通信协议** 对接。本文描述系统职责和协议边界；构建和安全状态请以根目录 README 与当前源代码为准。
+Trace Motion（追迹）由两个独立工程组成，二者通过 **TRJ2 轨迹文件** 与内部 **N3 通信协议** 对接。本文描述系统职责和协议边界；构建和安全状态请以根目录 README 与当前源代码为准。
 
 | 工程 | 位置 | 角色 |
 | --- | --- | --- |
 | PC 规划端 | `pc/` | 将地图、手绘、图片或路径操作编译为 TRJ2；负责可视化、预检、上传和任务控制。 |
 | ESP32 执行端 | `firmware/` | 接收并二次校验 TRJ2；驱动底盘和笔，处理硬件安全，并持续回传状态。 |
 
-本文以两端联合作为唯一视角。日常操作请看 [N3_ROBOT_USER_GUIDE.md](N3_ROBOT_USER_GUIDE.md)。
+本文以两端联合作为唯一视角。日常操作请看 [TRACE_MOTION_ROBOT_USER_GUIDE.md](TRACE_MOTION_ROBOT_USER_GUIDE.md)。
 
 ## 1. 两端总览
 
@@ -146,7 +146,7 @@ flowchart LR
 flowchart TB
     PC["PC 轨迹 UI\n规划、预检、上传、运行控制"]
     USB["USB Serial / UART0"]
-    WIFI["Wi-Fi SoftAP\nN3-Robot · TCP 5000"]
+    WIFI["Wi-Fi SoftAP\nTraceMotion · TCP 5000"]
 
     subgraph ESP["ESP32-S3: N3 固件"]
         APP["main.c\napp_main"]
@@ -184,8 +184,8 @@ PC 只需要面对 N3 协议；USB 与 Wi-Fi 是等价传输层。ESP32 接收�
 ```text
 test-motor/
 ├─ CMakeLists.txt                    ESP-IDF 工程入口
-├─ N3_ROBOT_USER_GUIDE.md            日常使用说明
-├─ N3_ARCHITECTURE.md                本文
+├─ TRACE_MOTION_ROBOT_USER_GUIDE.md  日常使用说明
+├─ TRACE_MOTION_ARCHITECTURE.md      本文
 ├─ main/
 │  ├─ CMakeLists.txt                 构建开关、组件依赖、实际编译清单
 │  ├─ main.c                         当前链接入口；app_main 启动 N3 service
@@ -225,7 +225,7 @@ sequenceDiagram
     Note over PC,S: UI 显示 READY
 ```
 
-Wi-Fi 档案中，ESP32 建立 `N3-Robot` 热点，并监听 `192.168.4.1:5000`。最多连接一个 TCP 客户端；新客户端会替换旧客户端。USB 不需要断开，适合作为调试备用通道。
+Wi-Fi 档案中，ESP32 默认建立 `TraceMotion` 热点，并监听 `192.168.4.1:5000`。发布或实机使用前应在构建参数中改为自己的热点名称和密码。最多连接一个 TCP 客户端；新客户端会替换旧客户端。USB 不需要断开，适合作为调试备用通道。
 
 ## 7. ESP32 上传与执行流程
 

@@ -43,7 +43,7 @@
 
 #ifndef N3_WIFI_AP_SSID
 /* A public release must provide its own network name at build time. */
-#define N3_WIFI_AP_SSID "N3-Robot"
+#define N3_WIFI_AP_SSID "TraceMotion"
 #endif
 
 #ifndef N3_WIFI_AP_PASSWORD

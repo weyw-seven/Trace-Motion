@@ -1,6 +1,6 @@
-# N3 绘图机器人
+# Trace Motion（追迹）绘图机器人
 
-N3 是一个三轮全向底盘绘图机器人项目。PC 端将图片、手绘路径或虚拟地图中的路径编译为 TRJ2 轨迹；ESP32-S3 固件验证、存储并执行轨迹，同时提供 USB 串口和可选的 Wi-Fi TCP 通信。
+Trace Motion（中文名：追迹）是一个三轮全向底盘绘图机器人项目。PC 端将图片、手绘路径或虚拟地图中的路径编译为 TRJ2 轨迹；ESP32-S3 固件验证、存储并执行轨迹，同时提供 USB 串口和可选的 Wi-Fi TCP 通信。
 
 > 当前默认固件是安全档：可以连接、上传、校验和执行 `PEN_UP`、`PEN_DOWN`、`WAIT` 事件，但默认不会使电机或笔机构动作。真实运动必须在构建时显式开启，并先完成硬件验收。
 
@@ -8,12 +8,12 @@ N3 是一个三轮全向底盘绘图机器人项目。PC 端将图片、手绘�
 
 ```text
 pc/        Python 轨迹规划、TRJ2 编解码、预览、地图 UI 与 PC—ESP32 通信
-firmware/  ESP-IDF / ESP32-S3 N3 服务、轨迹校验与运动执行代码
+firmware/  ESP-IDF / ESP32-S3 服务、轨迹校验与运动执行代码
 docs/      架构和实机使用说明
 archive/   历史实验代码与开发交接记录；不参与正式构建
 ```
 
-PC 决定路径内容，ESP32 负责最终的安全校验和实时执行。TRJ2 是两端共享的二进制轨迹格式；相关架构见 [docs/N3_ARCHITECTURE.md](docs/N3_ARCHITECTURE.md)。
+PC 决定路径内容，ESP32 负责最终的安全校验和实时执行。TRJ2 是两端共享的二进制轨迹格式；相关架构见 [docs/TRACE_MOTION_ARCHITECTURE.md](docs/TRACE_MOTION_ARCHITECTURE.md)。`N3` 是当前内部通信协议和源码模块名称，不是对外产品名称。
 
 ## PC 端快速开始
 
@@ -67,7 +67,7 @@ idf.py -B build-wifi -D N3_ENABLE_WIFI=1 `
 
 PC 与固件通过 N3 JSON 控制帧和 TRJ2 原始字节交互。固件会再次验证长度、CRC32、TRJ2 格式和当前构建能力；PC 端预检仅用于尽早提示，不能替代固件的安全检查。
 
-实机运行前请阅读 [docs/N3_ROBOT_USER_GUIDE.md](docs/N3_ROBOT_USER_GUIDE.md)，确认急停可用、轮子悬空或周边清空，并从安全档开始验证。
+实机运行前请阅读 [docs/TRACE_MOTION_ROBOT_USER_GUIDE.md](docs/TRACE_MOTION_ROBOT_USER_GUIDE.md)，确认急停可用、轮子悬空或周边清空，并从安全档开始验证。
 
 ## 归档内容
 

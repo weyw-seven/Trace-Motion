@@ -12,7 +12,7 @@ set(N3_ENABLE_SIMULATION 0 CACHE STRING
     "Enable hardware-free LINE/CIRCLE trajectory simulation (0 or 1)")
 set(N3_ENABLE_WIFI 0 CACHE STRING
     "Enable protected Wi-Fi SoftAP and N3 TCP transport (0 or 1)")
-set(N3_WIFI_AP_SSID "N3-Robot" CACHE STRING
+set(N3_WIFI_AP_SSID "TraceMotion" CACHE STRING
     "SoftAP name used when N3_ENABLE_WIFI=1")
 set(N3_WIFI_AP_PASSWORD "change-me-before-flashing" CACHE STRING
     "SoftAP password used when N3_ENABLE_WIFI=1; set a private value before flashing")
