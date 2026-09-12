@@ -1,14 +1,35 @@
-# ESP32-S3 固件应用
+# ESP32-S3 固件
 
-本目录是 Trace Motion（追迹）的 ESP-IDF 多应用工作区。每个 `apps/` 子目录都是独立的 ESP-IDF 工程根目录，应从对应目录运行 `idf.py`；不要在 `firmware/` 目录直接构建。
+本目录是 Trace Motion（追迹）的 ESP-IDF 多应用工作区。`apps/` 下每个目录都是独立工程根目录；请进入目标应用目录运行 `idf.py`，不要在 `firmware/` 目录直接构建。
 
-| 应用 | 状态 | 用途 |
+| 应用 | 用途 | 构建状态 |
 | --- | --- | --- |
-| `apps/trajectory-drawing/` | 可构建的参考应用 | TRJ2 上传、轨迹预检、绘图执行与安全档 |
-| `apps/line-infrared/` | 已整理，待构建验证 | 红外循迹、超声避障与 OLED 状态显示 |
-| `apps/line-ball-camera/` | 已导入，待集成 | 相机视觉循迹、超声避障、找球与推球任务 |
-| `components/` | 组件规划区 | 未来稳定的跨应用公共组件 |
+| `apps/trajectory-drawing/` | TRJ2 上传、校验、轨迹执行和安全档 | 可作为参考工程构建 |
+| `apps/line-infrared/` | 四路红外循迹、超声避障和 OLED 状态显示 | 已接入公共组件，需按实际车辆验证 |
+| `apps/line-ball-camera/` | 相机循迹、找球与推球 | 源码已整理，尚缺可复现工程配置 |
 
-`line-infrared` 来自原 `test-motor` 的红外循迹任务入口；它与轨迹绘图应用共用底盘来源，但红外循迹和避障逻辑是独立任务。`line-ball-camera` 从 task2 源码包导入。该包没有随附 ESP-IDF 项目配置和依赖锁定文件，且使用 UVC、JPEG 解码与语音播放依赖；在补齐依赖、板级引脚和实机安全验收前，不应将它视为可构建的发布应用。
+## 组件布局
 
-共享代码不得由应用间复制维护。当前三个应用中同名但不完全相同的电机、运动控制、循迹、超声和避障模块，先保留在各自应用内；它们需要通过 API、测试和配置收敛后，才能移动到 `components/`。
+公共实现位于 `components/`，由 ESP-IDF 的 `EXTRA_COMPONENT_DIRS` 发现：
+
+| 组件 | 职责 |
+| --- | --- |
+| `tm_chassis` | 电机、MPU6050、三轮运动学、里程计与底盘运动 |
+| `tm_sensors` | 红外和超声驱动 |
+| `tm_line_ir` | 红外循迹、超声避障和 OLED 状态显示 |
+| `tm_trajectory` | TRJ2 解码、执行、跟踪与笔控制接口 |
+| `tm_n3` | N3 服务、传输、轨迹运行桥接和硬件初始化 |
+
+组件中的单头文件模块在对应组件的 `.c` 文件中只定义一次实现宏。应用只包含公共头文件并链接组件，不能再次定义这些实现宏。
+
+## 构建
+
+安装 ESP-IDF 5.4.4 并加载环境后，例如构建轨迹绘图应用：
+
+```powershell
+cd firmware\apps\trajectory-drawing
+idf.py set-target esp32s3
+idf.py build
+```
+
+构建参数、应用职责和安全约束见仓库根目录 [README](../README.md) 与各应用目录中的 README。

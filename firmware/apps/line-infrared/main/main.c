@@ -2,34 +2,24 @@
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 
-#define MOTOR_CONTROL_IMPLEMENTATION
 #include "motor_control.h"
 
-#define MPU6050_IMPLEMENTATION
 #include "mpu6050.h"
 
-#define CHASSIS_KINEMATICS_IMPLEMENTATION
 #include "chassis_kinematics.h"
 
-#define CHASSIS_ODOMETRY_IMPLEMENTATION
 #include "chassis_odometry.h"
 
-#define CHASSIS_MOTION_IMPLEMENTATION
 #include "chassis_motion.h"
 
-#define INFRARED_SENSOR_IMPLEMENTATION
 #include "infrared_sensor.h"
 
-#define LINE_TRACKER_IMPLEMENTATION
 #include "line_tracker.h"
 
-#define ULTRASONIC_SENSOR_IMPLEMENTATION
 #include "ultrasonic_sensor.h"
 
-#define OBSTACLE_AVOID_IMPLEMENTATION
 #include "obstacle_avoid.h"
 
-#define OLED_DISPLAY_IMPLEMENTATION
 #include "oled_display.h"
 
 static const char *TAG = "MAIN";
