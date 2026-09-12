@@ -47,7 +47,7 @@ void app_main(void) {
     ESP_ERROR_CHECK(chassis_motion_init());
     ESP_LOGI(TAG, "Motion planner initialized");
 
-    /* test why extra left not done */
+    /* 输出初始位姿，便于确认里程计已开始更新。 */
     chassis_odometry_state_t odom;
     chassis_odometry_get_state(&odom);
     ESP_LOGI(TAG, "Odometry: init=%d, x=%.1f, y=%.1f, yaw=%.2f, ts=%lld", 
@@ -71,8 +71,8 @@ void app_main(void) {
     ESP_ERROR_CHECK(oled_display_start());
     ESP_LOGI(TAG,"OLED display started");
 
-    // 所有 init 后
-    vTaskDelay(pdMS_TO_TICKS(2000)); // 等待里程计稳定
+    /* 让 IMU 和里程计完成初始稳定后再交出底盘控制权。 */
+    vTaskDelay(pdMS_TO_TICKS(2000));
 
     /* 9. 启动巡线（默认启用） */
     line_tracker_start();

@@ -84,7 +84,7 @@ idf.py set-target esp32s3
 idf.py build
 ```
 
-刷写前请按实际车辆检查 `tm_sensors`、`tm_chassis` 和 `tm_line_ir` 中的引脚、轮径、PID 与避障距离配置。
+刷写前请按实际车辆检查 `tm_sensors`、`tm_chassis` 与 `line-infrared/main/` 中的引脚、轮径、PID 和避障距离配置。
 
 ### 相机循迹找球
 

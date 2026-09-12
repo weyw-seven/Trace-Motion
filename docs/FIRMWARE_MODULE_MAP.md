@@ -6,7 +6,7 @@
 | --- | --- | --- |
 | 底盘 | `tm_chassis`：电机、MPU6050、运动学、里程计、运动控制 | 各任务的速度、距离和动作策略 |
 | 传感器 | `tm_sensors`：红外、超声 | UVC 相机、语音、网页调试 |
-| 红外任务 | `tm_line_ir`：红外循迹、避障、OLED 状态显示 | `line-infrared` 的应用入口 |
+| 红外任务 | `apps/line-infrared/main/`：红外循迹、避障、OLED 状态显示 | `line_infrared_app.c` 统一编译任务实现，`main.c` 负责启动顺序 |
 | 轨迹通信 | `tm_trajectory`、`tm_n3`：TRJ2、轨迹运行、N3 通信 | `trajectory-drawing` 的应用入口与 SPIFFS 资源 |
 | 相机任务 | — | 视觉循迹、彩球检测、找球和推球 |
 

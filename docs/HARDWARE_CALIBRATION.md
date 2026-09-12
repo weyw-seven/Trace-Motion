@@ -12,8 +12,8 @@
 | MPU6050 | `firmware/components/tm_chassis/include/mpu6050.h` | `MPU6050_*` |
 | 红外循迹传感器 | `firmware/components/tm_sensors/include/infrared_sensor.h` | `IR_SENSOR_*` |
 | 超声传感器 | `firmware/components/tm_sensors/include/ultrasonic_sensor.h` | `ULTRASONIC_*` |
-| 红外循迹和避障行为 | `firmware/components/tm_line_ir/include/line_tracker.h`、`obstacle_avoid.h` | `LINE_*`、`AVOID_*` |
-| OLED | `firmware/components/tm_line_ir/include/oled_display.h` | `OLED_*` |
+| 红外循迹和避障行为 | `firmware/apps/line-infrared/main/line_tracker.h`、`obstacle_avoid.h` | `LINE_*`、`AVOID_*` |
+| OLED | `firmware/apps/line-infrared/main/oled_display.h` | `OLED_*` |
 | 抬笔机构 | `firmware/components/tm_trajectory/include/pen_control.h` 与 `firmware/components/tm_n3/n3_runner_bridge.c` | `PEN_CONTROL_DEFAULT_*`、笔 GPIO 与标定状态 |
 
 ## 推荐顺序
@@ -82,9 +82,9 @@
 
 ## 5. 循迹、避障和笔机构
 
-`LINE_KP`、`LINE_KD`、`LINE_V_MAX`、`LINE_V_MIN`、`LINE_LOST_*` 位于 `tm_line_ir/include/line_tracker.h`。在传感器模式正确、低速能够稳定循迹后再逐步提高速度；出现摆动先降低 `LINE_KP` 或提高 `LINE_KD`，不要先调避障距离。
+`LINE_KP`、`LINE_KD`、`LINE_V_MAX`、`LINE_V_MIN`、`LINE_LOST_*` 位于 `apps/line-infrared/main/line_tracker.h`。在传感器模式正确、低速能够稳定循迹后再逐步提高速度；出现摆动先降低 `LINE_KP` 或提高 `LINE_KD`，不要先调避障距离。
 
-`AVOID_*_DISTANCE_MM`、`AVOID_*_SPEED_*` 位于 `tm_line_ir/include/obstacle_avoid.h`。在实际赛道上量出障碍物宽度、传感器到车体前缘的距离、转弯净空和重新找到线的位置后设置。完成每个阶段后都要测试停车与恢复循迹。
+`AVOID_*_DISTANCE_MM`、`AVOID_*_SPEED_*` 位于 `apps/line-infrared/main/obstacle_avoid.h`。在实际赛道上量出障碍物宽度、传感器到车体前缘的距离、转弯净空和重新找到线的位置后设置。完成每个阶段后都要测试停车与恢复循迹。
 
 笔机构默认参数在 `tm_trajectory/include/pen_control.h`，实际 GPIO 和是否已标定在 `tm_n3/n3_runner_bridge.c` 的 `n3_runner_bridge_default_config()` 中设置。先令 `positions_calibrated=false`，使用安全脉宽范围逐步寻找不顶死机械结构的抬笔和落笔脉宽，再写入 `PEN_CONTROL_DEFAULT_UP_PULSE_US`、`PEN_CONTROL_DEFAULT_DOWN_PULSE_US` 以及移动和稳定时间。未经实际标定，不要把 `positions_calibrated` 设为 `true`。
 
