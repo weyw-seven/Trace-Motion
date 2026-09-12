@@ -8,12 +8,14 @@ Trace Motion（中文名：追迹）是一个三轮全向底盘绘图机器人�
 
 ```text
 pc/        Python 轨迹规划、TRJ2 编解码、预览、地图 UI 与 PC—ESP32 通信
-firmware/  ESP-IDF / ESP32-S3 服务、轨迹校验与运动执行代码
-docs/      架构和实机使用说明
+firmware/  ESP-IDF 多应用工作区：绘图机器人、循迹找球与未来公共组件
+docs/      架构、模块边界和实机使用说明
 archive/   历史实验代码与开发交接记录；不参与正式构建
 ```
 
 PC 决定路径内容，ESP32 负责最终的安全校验和实时执行。TRJ2 是两端共享的二进制轨迹格式；相关架构见 [docs/TRACE_MOTION_ARCHITECTURE.md](docs/TRACE_MOTION_ARCHITECTURE.md)。`N3` 是当前内部通信协议和源码模块名称，不是对外产品名称。
+
+固件应用与模块归属见 [firmware/README.md](firmware/README.md) 和 [docs/FIRMWARE_MODULE_MAP.md](docs/FIRMWARE_MODULE_MAP.md)。
 
 ## PC 端快速开始
 
@@ -41,7 +43,7 @@ python -m venv .venv
 安装 ESP-IDF 5.4.4，打开已加载 ESP-IDF 环境的 PowerShell：
 
 ```powershell
-cd firmware
+cd firmware\apps\trajectory-drawing
 idf.py set-target esp32s3
 idf.py build
 idf.py -p COMx flash monitor
@@ -53,7 +55,7 @@ idf.py -p COMx flash monitor
 idf.py -B build-sim -D N3_ENABLE_SIMULATION=1 build
 ```
 
-只有在完成急停、电源、方向和空载验收后，才考虑开启 `N3_ENABLE_HARDWARE`、`N3_ENABLE_MOTION` 与笔机构相关选项。构建参数说明见 [firmware/main/n3_build_config.h](firmware/main/n3_build_config.h)。
+只有在完成急停、电源、方向和空载验收后，才考虑开启 `N3_ENABLE_HARDWARE`、`N3_ENABLE_MOTION` 与笔机构相关选项。构建参数说明见 [firmware/apps/trajectory-drawing/main/n3_build_config.h](firmware/apps/trajectory-drawing/main/n3_build_config.h)。
 
 若启用 Wi-Fi，请在构建命令中传入自己的热点名称和强密码；仓库中的默认密码只是占位符，不能用于公开或实机部署：
 
@@ -71,7 +73,7 @@ PC 与固件通过 N3 JSON 控制帧和 TRJ2 原始字节交互。固件会再�
 
 ## 归档内容
 
-`archive/firmware-legacy-experiments/` 存放历史的电机、传感器和轨迹试验入口，以及已被替代的头文件版本。它们保留作参考，不被 `firmware/main/CMakeLists.txt` 编译。`archive/development-notes/` 保存阶段性交接和设计记录，其中的计划与状态不一定代表当前发布版本。
+`archive/firmware-legacy-experiments/` 存放未归入三个任务应用的历史试验入口和替代实现。它们保留作参考，不被 `firmware/apps/trajectory-drawing/main/CMakeLists.txt` 编译。`archive/development-notes/` 保存阶段性交接和设计记录，其中的计划与状态不一定代表当前发布版本。
 
 ## 许可证
 

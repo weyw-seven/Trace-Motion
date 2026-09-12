@@ -10,10 +10,10 @@ pc/__pycache__/
 pc/**/*.py[cod]
 
 # ESP-IDF configuration backups and generated build/flash artifacts
-firmware/build*/
-firmware/sdkconfig.old
-firmware/managed_components/
-firmware/.idf_component_manager/
+firmware/**/build*/
+firmware/**/sdkconfig.old
+firmware/**/managed_components/
+firmware/**/.idf_component_manager/
 
 # Editor and operating-system files
 .vscode/
