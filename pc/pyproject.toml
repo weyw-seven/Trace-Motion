@@ -1,0 +1,28 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pc-trajectory-phase-a"
+version = "0.1.0"
+description = "PC geometry, toolpath compilation, and canonical TRJ1/TRJ2 protocols"
+requires-python = ">=3.10"
+
+[project.scripts]
+pc-trajectory = "pc_trajectory.cli:main"
+pc-trajectory-calibrate = "pc_trajectory.camera_calibration_ui:main"
+pc-trajectory-map = "pc_trajectory.navigation_ui:main"
+
+[project.optional-dependencies]
+preview = ["matplotlib>=3.8,<4"]
+raster = ["numpy>=1.25,<3", "pillow>=10,<13"]
+demo = ["numpy>=1.25,<3", "pillow>=10,<13", "opencv-python>=4.8,<5"]
+serial = ["pyserial>=3.5,<4"]
+dev = ["pytest>=8,<10", "matplotlib>=3.8,<4", "numpy>=1.25,<3", "pillow>=10,<13"]
+
+[tool.setuptools.packages.find]
+include = ["pc_trajectory*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

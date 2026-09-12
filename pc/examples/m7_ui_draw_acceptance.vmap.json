@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "name": "M7 UI drawing acceptance",
+  "workspace": {
+    "width_mm": 800.0,
+    "height_mm": 700.0
+  },
+  "view": {
+    "pan_u_px": 0.0,
+    "pan_v_px": 0.0,
+    "zoom": 1.0
+  },
+  "home": {
+    "map_x_mm": 200.0,
+    "map_y_mm": 200.0,
+    "yaw_deg": 0.0,
+    "tag_id": 0
+  },
+  "background": null,
+  "paths": [
+    {
+      "id": "m7-line",
+      "name": "200 mm line",
+      "closed": false,
+      "drawable": true,
+      "path_kind": "polyline",
+      "points_map_mm": [[200.0, 200.0], [400.0, 200.0]]
+    },
+    {
+      "id": "m7-arc-line",
+      "name": "R150 quarter circle",
+      "closed": false,
+      "drawable": true,
+      "path_kind": "freehand",
+      "points_map_mm": [
+        [400.0, 200.0], [438.8, 205.1], [475.0, 220.1],
+        [506.1, 243.9], [529.9, 275.0], [544.9, 311.2], [550.0, 350.0]
+      ]
+    },
+    {
+      "id": "m7-final-line",
+      "name": "200 mm final line",
+      "closed": false,
+      "drawable": true,
+      "path_kind": "polyline",
+      "points_map_mm": [[550.0, 350.0], [550.0, 550.0]]
+    }
+  ],
+  "landmarks": [],
+  "obstacles": [],
+  "settings": {
+    "schema": 1,
+    "planner": {
+      "travel_speed_mm_s": 100.0,
+      "draw_speed_mm_s": 65.0,
+      "acceleration_mm_s2": 300.0,
+      "enable_arc_fitting": true,
+      "geometry_tolerance_mm": 2.0,
+      "min_arc_points": 6,
+      "min_arc_sweep_deg": 12.0,
+      "min_arc_radius_mm": 100.0,
+      "smoothing_iterations": 0,
+      "smoothing_strength": 0.0,
+      "simplify_tolerance_mm": 0.01
+    },
+    "navigation": {
+      "mode": "path",
+      "pen_mode": "draw",
+      "direction": "forward",
+      "selected_path_ids": ["m7-line", "m7-arc-line", "m7-final-line"]
+    }
+  }
+}

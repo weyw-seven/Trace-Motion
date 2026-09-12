@@ -1,0 +1,23 @@
+# Python environments, test caches, and generated acceptance artifacts
+pc/.conda/
+pc/.venv/
+pc/.pytest_cache/
+pc/.pytest_tmp*/
+pc/.pytest-tmp*/
+pc/pc_trajectory_phase_a.egg-info/
+pc/test_results/
+pc/__pycache__/
+pc/**/*.py[cod]
+
+# ESP-IDF configuration backups and generated build/flash artifacts
+firmware/build*/
+firmware/sdkconfig.old
+firmware/managed_components/
+firmware/.idf_component_manager/
+
+# Editor and operating-system files
+.vscode/
+.idea/
+*.code-workspace
+Thumbs.db
+.DS_Store
